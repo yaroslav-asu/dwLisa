@@ -18,7 +18,7 @@
     <div class="text-wrapper">
         <h1></h1>
         <h2 class="days-until"></h2>
-        <h2>и</h2>
+        <h2 class="and"></h2>
         <h2 class="hours-until"></h2>
         <h2>до приезда</h2>
         <h2>Лизы!!</h2>
@@ -133,14 +133,17 @@
         h2.textContent = 'Дней';
     }
 
-    if (hoursDiff === 1) {
-        h3.textContent = `${hoursDiff} час`;
-    } else if (hoursDiff > 1 && hoursDiff < 5) {
-        h3.textContent = `${hoursDiff} часа`;
-    } else {
-        h3.textContent = `${hoursDiff} часов`;
+    if (daysDiff < 1) {
+        if (hoursDiff === 1) {
+            h3.textContent = `${hoursDiff} час`;
+        } else if (hoursDiff > 1 && hoursDiff < 5) {
+            h3.textContent = `${hoursDiff} часа`;
+        } else {
+            h3.textContent = `${hoursDiff} часов`;
+        }
+        const and = document.querySelector('.and');
+        and.textContent = 'и';
     }
-
 </script>
 <script>
     var snow = new Snowfall({
