@@ -144,6 +144,27 @@
         const and = document.querySelector('.and');
         and.textContent = 'и';
     }
+
+    function reloadEveryHourOnTheHour() {
+        const now = new Date();
+        const nextHour = new Date(now);
+
+        nextHour.setHours(now.getHours() + 1, 0, 0, 0); // следующий час ровно 00 минут
+
+        const timeUntilNextHour = nextHour - now;
+
+        // Первый раз обновляем в начале следующего часа
+        setTimeout(() => {
+            location.reload();
+
+            // После первого обновления — обновляем каждый час
+            setInterval(() => {
+                location.reload();
+            }, 60 * 60 * 1000); // 1 час
+        }, timeUntilNextHour);
+    }
+
+    reloadEveryHourOnTheHour();
 </script>
 <script>
     var snow = new Snowfall({
