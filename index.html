@@ -18,6 +18,9 @@
     <div class="text-wrapper">
         <h1></h1>
         <h2 class="days-until"></h2>
+        <h2>и</h2>
+        <h2 class="hours-until"></h2>
+        <h2>до приезда</h2>
         <h2>Лизы!!</h2>
     </div>
 </div>
@@ -106,22 +109,38 @@
 <script>
     const h1 = document.querySelector('h1');
     const h2 = document.querySelector('.days-until');
-    const arrivalDate = new Date('2025-07-04');
-    const today = new Date()
+    const h3 = document.querySelector('.hours-until');
 
-    const timeDiff = arrivalDate - today;
-    let daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-    if (daysDiff < 0) {
+    const arrivalDate = new Date('2025-07-04T08:30:00');
+    const now = new Date();
+
+    const timeDiff = arrivalDate - now;
+    let daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+    let hoursDiff = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+    if (timeDiff <= 0) {
         daysDiff = 0;
+        hoursDiff = 0;
     }
+
     h1.textContent = daysDiff.toString();
+
     if (daysDiff === 1) {
-        h2.textContent = 'День до приезда';
+        h2.textContent = 'День';
     } else if (daysDiff > 1 && daysDiff < 5) {
-        h2.textContent = 'Дня до приезда';
+        h2.textContent = 'Дня';
     } else {
-        h2.textContent = 'Дней до приезда';
+        h2.textContent = 'Дней';
     }
+
+    if (hoursDiff === 1) {
+        h3.textContent = `${hoursDiff} час`;
+    } else if (hoursDiff > 1 && hoursDiff < 5) {
+        h3.textContent = `${hoursDiff} часа`;
+    } else {
+        h3.textContent = `${hoursDiff} часов`;
+    }
+
 </script>
 <script>
     var snow = new Snowfall({
